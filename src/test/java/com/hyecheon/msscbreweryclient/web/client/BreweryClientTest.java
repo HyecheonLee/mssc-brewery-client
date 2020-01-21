@@ -14,14 +14,14 @@ class BreweryClientTest {
   @Autowired
   BreweryClient client;
 
-  @Test
-  void getBeerById() {
+@Test
+  void getCustomerById() {
     final var dto = client.getBeerById(UUID.randomUUID());
     assertThat(dto).isNotNull();
   }
 
   @Test
-  void testSaveNewBeer() {
+  void testSaveNewCustomer() {
     //givn
     final var beerDto = BeerDto.builder().beerName("New Beer").build();
 
@@ -44,4 +44,35 @@ class BreweryClientTest {
   void testDeleteBeer() {
     client.deleteBeer(UUID.randomUUID());
   }
+  @Test
+  void getBeerById() {
+    final var dto = client.getBeerById(UUID.randomUUID());
+    assertThat(dto).isNotNull();
+  }
+
+  @Test
+  void testSaveNewBeer() {
+    //givn
+    final var customerDto = CustomerDto.builder().name("New Customer").build();
+
+    final var uri = client.saveNewCustomer(customerDto);
+
+    assertThat(customerDto).isNotNull();
+
+    System.out.println(uri.toString());
+  }
+
+  @Test
+  void testUpdateCustomer() {
+    //givn
+    final var customerDto = CustomerDto.builder().name("New Customer").build();
+
+    client.updateCustomer(UUID.randomUUID(), customerDto);
+  }
+
+  @Test
+  void testDeleteCustomer() {
+    client.deleteCustomer(UUID.randomUUID());
+  }
+
 }
