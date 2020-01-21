@@ -1,6 +1,7 @@
 package com.hyecheon.msscbreweryclient.web.client;
 
 import com.hyecheon.msscbreweryclient.web.model.BeerDto;
+import java.net.URI;
 import java.util.UUID;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,7 +18,6 @@ public class BreweryClient {
   @Setter
   private String apiHost;
 
-
   private final RestTemplate restTemplate;
 
   public BreweryClient(RestTemplateBuilder restTemplateBuilder) {
@@ -27,4 +27,17 @@ public class BreweryClient {
   public BeerDto getBeerById(UUID beerId) {
     return restTemplate.getForObject(apiHost + BEER_PATH_V1 + beerId.toString(), BeerDto.class);
   }
+
+  public URI saveNewBeer(BeerDto beerDto) {
+    return restTemplate.postForLocation(apiHost + BEER_PATH_V1, beerDto);
+  }
+
+  public void updateBeer(UUID uuid, BeerDto beerDto) {
+    restTemplate.put(apiHost + BEER_PATH_V1 + "/" + uuid.toString(), beerDto);
+  }
+
+  public void deleteBeer(UUID beerId) {
+    restTemplate.delete(apiHost + BEER_PATH_V1 + "/" + beerId);
+  }
 }
+
