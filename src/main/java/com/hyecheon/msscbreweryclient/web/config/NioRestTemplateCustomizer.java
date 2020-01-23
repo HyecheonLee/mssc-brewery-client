@@ -11,7 +11,7 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-public class NIORestTemplateCustomizer implements RestTemplateCustomizer {
+public class NioRestTemplateCustomizer implements RestTemplateCustomizer {
 
   public ClientHttpRequestFactory clientHttpRequestFactory() throws IOReactorException {
     final DefaultConnectingIOReactor ioreactor = new DefaultConnectingIOReactor(
